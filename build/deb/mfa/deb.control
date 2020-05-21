@@ -1,0 +1,25 @@
+Source: {{.Name}}
+Section: science
+Priority: extra
+Maintainer: {{.Author}}
+Build-Depends: debhelper (>= 8.0.0), {{.GoBootPackage}}
+Standards-Version: 3.9.5
+Homepage: https://MFA.org
+Vcs-Git: git://github.com/MFAChain/mfachain.git
+Vcs-Browser: https://github.com/MFAChain/mfachain
+
+Package: {{.Name}}
+Architecture: any
+Depends: ${misc:Depends}, {{.ExeList}}
+Description: Meta-package to install mfa and other tools
+ Meta-package to install mfa and other tools
+
+{{range .Executables}}
+Package: {{$.ExeName .}}
+Conflicts: {{$.ExeConflicts .}}
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Built-Using: ${misc:Built-Using}
+Description: {{.Description}}
+ {{.Description}}
+{{end}}
